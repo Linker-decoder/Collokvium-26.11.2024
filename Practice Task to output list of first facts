@@ -1,0 +1,50 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class FactorialCalculator {
+
+    public static void main(String[] args) {
+        // Создаем объект Scanner для считывания ввода пользователя
+        Scanner scanner = new Scanner(System.in);
+        
+        // Запрашиваем у пользователя ввод натурального числа n
+        System.out.print("Введите натуральное число n: ");
+        int n = scanner.nextInt();
+
+        // Вычисляем факториалы от 0! до n!
+        List<Long> factorials = calculateFactorials(n);
+        
+        // Выводим результаты
+        System.out.println("Первые " + n + " факториалов:");
+        for (int i = 0; i < factorials.size(); i++) {
+            System.out.println(i + "! = " + factorials.get(i));
+        }
+        
+        // Закрываем сканер
+        scanner.close();
+    }
+
+    /**
+     * Метод для вычисления факториалов от 0! до n!
+     * @param n - максимальное значение для вычисления факториала
+     * @return список факториалов от 0! до n!
+     */
+    private static List<Long> calculateFactorials(int n) {
+        // Создаем список для хранения факториалов
+        List<Long> factorials = new ArrayList<>();
+        
+        // Добавляем 0! в список (0! = 1)
+        factorials.add(1L); 
+
+        // Вычисляем факториалы от 1! до n!
+        for (int i = 1; i <= n; i++) {
+            // Вычисляем i! на основе (i-1)!
+            long factorial = factorials.get(i - 1) * i;
+            // Добавляем вычисленный факториал в список
+            factorials.add(factorial);
+        }
+
+        return factorials; // Возвращаем список факториалов
+    }
+}
